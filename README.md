@@ -4,17 +4,18 @@
 <div align="center">
   <img src="docs/screenshots/icon.png" width="104" alt="Lazy NR by RewardK">
   <h1>Lazy NR <code>by RewardK</code></h1>
-  <p><b>Autopilot AG pentru News Reporters.</b><br>
+  <p><b>Autopilot AG pentru News Reporters.</b></p>
   <p>
-    <a href="#download"><img src="https://img.shields.io/badge/version-1.1.0.0-00ff6a?style=flat-square" alt="Version"></a>
+    <a href="#download"><img src="https://img.shields.io/badge/version-1.2.0.0-22c55e?style=flat-square" alt="Version"></a>
     <a href="#cerinte"><img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078d4?style=flat-square" alt="Platform"></a>
     <a href="#download"><img src="https://img.shields.io/badge/portable-.exe-8b5cf6?style=flat-square" alt="Portable"></a>
-    <a href="https://www.virustotal.com/gui/file/12afb47e4b23fdab52c13df85bec3f2e527ccb4695f3c1b39d539719b9b0bb0f?nocache=1"><img src="https://img.shields.io/badge/VirusTotal-1%2F69-f5c542?style=flat-square" alt="VirusTotal"></a>
-    <a href="#credits"><img src="https://img.shields.io/badge/made%20by-RewardK-00ff6a?style=flat-square" alt="Made by RewardK"></a>
+    <a href="https://www.virustotal.com/gui/file/872aff25d01aa2f2885539501a18c468e749347b390e24e2cae9b2ae8db226c6"><img src="https://img.shields.io/badge/VirusTotal-verific%C4%83%20hash--ul-f5c542?style=flat-square" alt="VirusTotal"></a>
+    <a href="#credits"><img src="https://img.shields.io/badge/made%20by-RewardK-22c55e?style=flat-square" alt="Made by RewardK"></a>
   </p>
   <p>
     <a href="../../releases/latest"><b>⬇️ download exe</b></a> ·
-    <a href="#free-key"><b>🔑 cheie free gemini</b></a> ·
+    <a href="#own-key"><b>🔑 cheie gemini (gratis)</b></a> ·
+    <a href="#nou"><b>✨ ce e nou în 1.2</b></a> ·
     <a href="#demo"><b>📸 screenshots</b></a> ·
     <a href="#faq"><b>❓ faq</b></a>
   </p>
@@ -28,6 +29,22 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 
 > [!IMPORTANT]
 > **nu poti organiza fara sa participi**.
+
+---
+
+<a id="nou"></a>
+## ✨ Ce e nou în 1.2
+
+- **Interfață nouă** — stil modern, grafit, mai lizibil; Dashboard refăcut (stare, următoarea acțiune, anunțuri vs țintă, cereri Gemini, chei).
+- **Prompt rescris după Ghidul reporterului** — nu mai refuză SMS-uri doar pentru că jucătorul a scris `!!`, `100.000.000$`, „astept oferte” sau bonusuri; le curăță și publică.
+- **Validator care compară anunțul cu SMS-ul** — numele, telefonul și fiecare număr (preț, buget, zile, kilometri, ID) trebuie să vină din SMS. Nu mai ies bugete inventate de tipul `$30.000.000.000`.
+- **Corectură automată** — dacă validatorul găsește o greșeală (VIP pe vehicul care nu poate fi VIP, „si” lipsă, preț greșit), Gemini primește o singură dată erorile și corectează; anunțurile prea lungi sunt scurtate local (preț, apoi hidden).
+- **Maxim 122 de caractere** pe anunț (cu `/news ` = 128, cât acceptă jocul) — nu mai iese nimic tăiat.
+- **Regula de 5 minute fără refuzuri** — dacă un jucător a primit anunț de curând, SMS-ul nou așteaptă și pleacă automat când trec cele 5 minute.
+- **`/number` automat** — la `:49:30`, cine a pus `.` dar nu și-a dat telefonul primește `/number Nume`, iar numărul intră în formulă.
+- **`Atentie, :58.`** pe `/f` (regula 25 din regulament), când organizezi.
+- **Somații staff** — pagină nouă care te alertează (sunet, notificare, banner) când un admin/helper îți verifică prezența, pe orice chat.
+- **`0 zile` → „cu 0 zile”**, `x1`/`1x` = hidden, `x2`/`2x` = dublu hidden, ID-ul casei opțional, FBI Truck acceptat, NRG-500 nu mai e VIP — toate după ghid.
 
 ---
 
@@ -46,6 +63,10 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 |:---:|:---:|
 | ![Inbox](docs/screenshots/inbox.png) | ![Formatter](docs/screenshots/formatter.png) |
 
+| Somații staff | Chei & limite |
+|:---:|:---:|
+| ![Somații staff](docs/screenshots/alerts.png) | ![Chei](docs/screenshots/keys.png) |
+
 ---
 
 <a id="features"></a>
@@ -60,7 +81,10 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 | **Formule la `:20`** | Start `:50:20`, continuare `:55:20`, stop `:59:20`; secunda este configurabilă. |
 | **Fără formule târzii** | O acțiune ratată cu peste **10 secunde** este sărită intenționat. |
 | **Alăturat = fără formule** | Nu trimite niciodată start/continuare/stop când organizează altcineva. |
-| **Gemini + validator local** | Modelul formează, validatorul verifică structura, ora, telefonul, prețul și regulile AG. |
+| **Gemini + validator local** | Modelul formează după Ghidul reporterului; validatorul verifică structura și compară anunțul cu SMS-ul (nume, telefon, fiecare număr). Detaliile inventate sunt blocate, greșelile reparabile primesc o corectură. |
+| **Regula de 5 minute** | SMS-ul venit prea devreme de la același jucător așteaptă și e procesat automat când trec cele 5 minute (dacă mai e timp până la stop). |
+| **`/number` automat** | La `:49:30`, cine a dat `.` fără telefon primește `/number Nume`; răspunsul serverului e citit din chatlog. |
+| **Somații staff** | Detectează verificările de prezență de la admin/helper pe orice chat și te alertează să răspunzi. |
 | **Min / max anunțuri** | Minimul avertizează la stop; maximul este limită dură înainte de Gemini. Formulele nu se numără. |
 | **Ritm `/news`** | Maximum un `/news` la fiecare **6.0s** (configurabil), atât anunțuri cât și formule. |
 | **Publicare full auto** | Aduce SA-MP în față, verifică focusul, lipește și apasă Enter. Alternativ, clipboard. |
@@ -77,6 +101,8 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 - **Nu trimiți formulă când ești alăturat** — exact greșeala care enervează organizatorul.
 - **Nu rămâi cu dots necolectate** — parserul este tolerant, iar fallback-ul manual completează ce a scăpat.
 - **Nu publici anunț invalid** — validatorul local este a doua poartă după model.
+- **Nu publici detalii inventate** — un preț sau un buget care nu e în SMS nu trece.
+- **Nu ratezi o somație** — banner, sunet și notificare până confirmi.
 
 ---
 
@@ -87,7 +113,7 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 - **SA-MP** pornit, cu fereastra jocului detectabilă.
 - **Chatlog activ**: `Documents\GTA San Andreas User Files\SAMP\chatlog.txt`.
 - **Internet** pentru Gemini.
-- O cheie Gemini — poți folosi [cheia comunitară](#free-key) sau îți faci una proprie.
+- O cheie Gemini — e gratuită, ți-o faci în 2 minute: [tutorial](#own-key).
 - Pentru SendInput: dacă SA-MP rulează ca Administrator, pornește și Lazy NR ca Administrator.
 
 > Dacă `chatlog.txt` nu există, scrie `/chatlog` în SA-MP și verifică din nou folderul `SAMP`.
@@ -98,7 +124,7 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 ## 🚀 cum instalez ai u
 
 1. **Descarcă** `Lazy NR by RewardK.exe` din [Releases](../../releases/latest) și rulează-l. Nu are installer.
-2. Mergi la **Chei & limite** și adaugă [cheia comunitară](#free-key) sau o cheie a ta.
+2. Fă-ți o [cheie Gemini gratuită](#own-key) și adaug-o în **Chei & limite**.
 3. Mergi la **Autopilot**:
    - nume exact din joc;
    - telefon propriu;
@@ -106,8 +132,9 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
    - orele sesiunilor;
    - minimul / maximul de anunțuri.
 4. Deschide SA-MP și asigură-te că chatlog-ul este activ.
-5. Apasă **PORNEȘTE AUTOPILOTUL**. Prima dată folosește **Mod simulare** ca să vezi tot fluxul fără să trimiți nimic.
+5. Apasă **Pornește autopilotul**. Prima dată folosește **Simulare** ca să vezi tot fluxul fără să trimiți nimic.
 6. La `:45` începe scanarea. Tu doar verifici panoul „Pașii AG în timp real” și logul.
+7. Opțional: în **Somații staff** pune numele adminilor/helperilor de pe server.
 
 > [!TIP]
 > Pentru prima sesiune, pune `:46:30` ca oră de anunț. Este recomandarea pentru orice membru și îți lasă timp să citești chatul.
@@ -118,49 +145,20 @@ un soft care foloseste gemini prin api (ai 300 de requests gratis pe zi) pentru 
 ## 📦 Descărcare & integritate
 
 **Fișier:** `Lazy NR by RewardK.exe`  
-**Versiune:** `1.1.0.0`  
-**Mărime:** `49.374.803` bytes (≈ 47,1 MiB)  
+**Versiune:** `1.2.0.0`  
+**Mărime:** `49.436.519` bytes (≈ 47,1 MiB)  
 **SHA-256:**
 
 ```text
-12afb47e4b23fdab52c13df85bec3f2e527ccb4695f3c1b39d539719b9b0bb0f
+872aff25d01aa2f2885539501a18c468e749347b390e24e2cae9b2ae8db226c6
 ```
 
-**VirusTotal:** [raport pentru hash-ul de mai sus](https://www.virustotal.com/gui/file/12afb47e4b23fdab52c13df85bec3f2e527ccb4695f3c1b39d539719b9b0bb0f?nocache=1) — **1/69** (scan la 10.11.2026).
+**VirusTotal:** [raport pentru hash-ul de mai sus](https://www.virustotal.com/gui/file/872aff25d01aa2f2885539501a18c468e749347b390e24e2cae9b2ae8db226c6).
 
 > [!WARNING]
-> Raportul arată **1 detecție izolată din 69**. Pentru un `.exe` nesemnat, împachetat cu PyInstaller, este cel mai probabil un **false positive de heuristică**. Nu există garanție absolută pentru niciun binar: verifică hash-ul, uită-te la raport și rulează doar din sursa în care ai încredere.
+> Un `.exe` nesemnat, împachetat cu PyInstaller, poate primi 1–2 detecții izolate, care sunt de obicei **false positive de heuristică**. Nu există garanție absolută pentru niciun binar: verifică hash-ul, uită-te la raport și rulează doar din sursa în care ai încredere.
 >
 > Windows SmartScreen poate cere confirmare la prima rulare: **More info → Run anyway**. Dacă antivirusul tău blochează fișierul, verifică hash-ul înainte de orice altceva.
-
----
-
-<a id="free-key"></a>
-## 🔑 cheie free de la mn #3 (gratuită)
-
-Am lăsat una dintre chei liberă pentru comunitate, ca să poți testa aplicația fără să-ți faci cont Gemini în prima secundă.
-
-> [!CAUTION]
-> Cheia este **publică** (este publicată intenționat aici). Oricine o poate folosi, iar quota ei se poate termina sau poate fi revocată oricând. Pentru utilizare zilnică, stabilitate și confidențialitate, **fă-ți propria cheie** — vezi [tutorialul de mai jos](#own-key).
-
-<details>
-<summary><b>Arată cheia comunitară #3</b></summary>
-
-```text
-[redacted] nu ma lasa github s-o pun. daca vrei da-mi mesaj pe discord sau mai bine ia-ti tu una ca e gratis, ai tutorial mai jos facut de ai.
-```
-
-</details>
-
-**Cum o folosești:**
-
-1. Deschide **Chei & limite**.
-2. La etichetă scrie `comunitară`.
-3. Lipește cheia în câmpul de cheie.
-4. Apasă **ADAUGĂ** — aplicația o testează automat.
-5. Dacă apare o eroare `429`, `403` sau „cheie respinsă”, treci pe cheia ta.
-
-> Cheia este pentru **Lazy NR**, nu pentru alte proiecte. Nu o copia în alte aplicații, nu o folosi pentru date personale și nu o revinde.
 
 ---
 
@@ -223,9 +221,10 @@ Nu urca `config.json` pe GitHub și nu îl trimite nimănui. Dacă vrei să rese
 | `:45:00` / `:45:30` | Opțiuni de anunț doar pentru **lider / colider / tester / responsabil**. Aplicația afișează un warning galben, dar opțiunile rămân selectabile. |
 | `:46:00` / `:46:30` | Anunț pentru orice membru. **`:46:30` este recomandat** și este default-ul. |
 | `:47:00` | Lista de participanți pe `/f`. |
-| `:49:30` | Termen informativ pentru telefoane. |
+| `:49:30` | Termen pentru telefoane. Cine a dat `.` dar nu și numărul primește automat `/number Nume`. |
 | `:50:20` | Start sesiune + formula oficială. |
 | `:55:20` | Continuare + formula oficială. |
+| `:58:00` | `Atentie, :58.` pe `/f` (doar când organizezi și ai participanți). Anunțurile continuă și după. |
 | `:59:20` | Stop + formula oficială. |
 
 ### Reguli respectate automat
@@ -237,6 +236,7 @@ Nu urca `config.json` pe GitHub și nu îl trimite nimănui. Dacă vrei să rese
 - **Formulele sunt oficiale**, nu texte scrise de model.
 - **O formulă întârziată este mai riscantă decât una lipsă.** După fereastra de 10 secunde, acțiunea este sărită.
 - **Când ești alăturat, nu trimiți formule.** Publici doar anunțuri.
+- **5 minute între anunțuri pentru același jucător.** SMS-ul venit mai devreme așteaptă, nu e refuzat.
 
 ### De ce `:20`?
 
@@ -249,7 +249,8 @@ Pentru că ceasul din joc se actualizează cu întârziere față de cel al PC-u
 
 | Setare | Comportament |
 |---|---|
-| **Minim / sesiune** | Țintă. Dacă nu este atinsă, la stop apare un warning. Nu blochează publicarea. |
+| **Minim / sesiune** | Țintă. `auto` = regula 40: minimum 5 anunțuri între 11:00–00:00 și 3 între 00:00–11:00. Dacă nu este atinsă, la stop apare un warning. Nu blochează publicarea. |
+| **Lungime maximă** | `122` de caractere pe anunț (`/news ` + anunț = `128`, cât acceptă jocul). Anunțurile prea lungi sunt scurtate (preț, apoi hidden) sau refuzate. |
 | **Maxim / sesiune** | Limită dură. SMS-urile peste ea sunt refuzate **înainte** de Gemini. `0` = fără limită. |
 | **Interval minim `/news`** | Implicit `6.0s`. Se aplică anunțurilor și formulelor. Fiecare formulă are fereastră de 10 secunde; dacă throttle-ul ar face-o prea târzie, este sărită. |
 
@@ -277,7 +278,7 @@ Pentru că ceasul din joc se actualizează cu întârziere față de cel al PC-u
 ## 🧭 Paginile aplicației
 
 ### Dashboard
-Vezi dintr-o privire dacă autopilotul este pornit, ce sesiune rulează, în ce pas este AG-ul, câte cereri ai făcut azi și ultimele evenimente.
+Vezi dintr-o privire dacă autopilotul este pornit, următoarea acțiune cu numărătoare inversă, sesiunea, pasul AG, anunțurile publicate față de țintă, cererile Gemini de azi, ultimele evenimente și consumul pe chei.
 
 ### Autopilot
 Aici configurezi tot fluxul:
@@ -295,6 +296,9 @@ Fiecare SMS are un rând: textul primit, anunțul formatat, statusul, cheia folo
 
 ### Formatter
 Lipești un SMS complet (`SMS from Nume (1234): text`) sau completezi nume + telefon + text. Aplicația formatează cu Gemini și validează local. Verificările de oră și sesiune sunt relaxate, dar structura anunțului rămâne strictă.
+
+### Somații staff
+Detector pentru verificările de prezență de la admin/helper („esti la PC? raspunde…”), pe orice chat, indiferent de format. La o somație: banner roșu, sunet repetat, notificare Windows, iconița clipește, iar anunțurile noi așteaptă până apeși **Am văzut, răspund eu**. Poți adăuga numele staff-ului și cuvinte cheie proprii. Aplicația nu răspunde în locul tău.
 
 ### Chei & limite
 Adaugi, testezi, activezi/dezactivezi sau ștergi chei. Vezi consumul pe fiecare cheie și erorile recente.
@@ -366,7 +370,7 @@ Toate datele stau în `%APPDATA%\LazyNR`:
 <details>
 <summary><b>Pot folosi aplicația fără cheie Gemini?</b></summary>
 
-Nu. Formatarea și decizia PUBLISH/REFUSE trec prin Gemini. Poți folosi cheia comunitară sau îți faci una proprie.
+Nu. Formatarea și decizia PUBLISH/REFUSE trec prin Gemini. Cheia e gratuită: [tutorial](#own-key).
 </details>
 
 <details>
@@ -406,9 +410,15 @@ Fereastra de 10 secunde a expirat. O formulă trimisă prea târziu poate fi san
 </details>
 
 <details>
-<summary><b>Cheia comunitară nu mai merge. Ce fac?</b></summary>
+<summary><b>De ce a stat un SMS „în așteptare”?</b></summary>
 
-Probabil quota s-a terminat sau cheia a fost revocată. Folosește [tutorialul pentru cheia proprie](#own-key). Cheia publică este un bonus, nu o garanție.
+Jucătorul a primit anunț acum mai puțin de 5 minute (regula AG 33), sau ai o somație de la staff neconfirmată. SMS-ul se procesează automat când trec cele 5 minute, respectiv după ce apeși **Am văzut, răspund eu**.
+</details>
+
+<details>
+<summary><b>Răspunde aplicația la somațiile staff-ului?</b></summary>
+
+Nu. Te alertează ca să răspunzi tu în joc.
 </details>
 
 <details>
@@ -468,4 +478,4 @@ Rezultatul apare în `dist\Lazy NR by RewardK.exe`.
 
 - Regulile AG ale comunității au prioritate față de orice automatizare.
 
-<p align="center"><b>Lazy NR by RewardK · v1.1.0.0</b><br><code>made by RewardK</code></p>
+<p align="center"><b>Lazy NR by RewardK · v1.2.0.0</b><br><code>made by RewardK</code></p>
