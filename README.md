@@ -4,7 +4,7 @@
   <p><b>Autopilot AG pentru News Reporters.</b><br>
   De la SMS la anunț validat, de la <code>:45</code> la <code>:59</code>, fără să stai cu ochii pe chat.</p>
   <p>
-    <a href="#download"><img src="https://img.shields.io/badge/version-1.3.0.0-00ff6a?style=flat-square" alt="Version"></a>
+    <a href="#download"><img src="https://img.shields.io/badge/version-1.3.2.0-00ff6a?style=flat-square" alt="Version"></a>
     <a href="#cerinte"><img src="https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078d4?style=flat-square" alt="Platform"></a>
     <a href="#download"><img src="https://img.shields.io/badge/portable-.exe-8b5cf6?style=flat-square" alt="Portable"></a>
     <a href="https://www.virustotal.com/gui/home/upload"><img src="https://img.shields.io/badge/VirusTotal-scan%20before%20run-f5c542?style=flat-square" alt="VirusTotal"></a>
@@ -124,12 +124,12 @@ Nu trebuie să fii lider ca să organizezi. Trebuie doar să respecți regula: *
 ## 📦 Descărcare & integritate
 
 **Fișier:** `Lazy NR by RewardK.exe`  
-**Versiune:** `1.3.0.0`  
-**Mărime:** `46.826.797` bytes (≈ 44,7 MiB)  
+**Versiune:** `1.3.2.0`  
+**Mărime:** `49.469.848` bytes (≈ 47,2 MiB)  
 **SHA-256:**
 
 ```text
-d1b8f579e467b08e8e29abd172ed5bb546d0409074fb81c1cd0ae10a4744f870
+04ae3f8018804989548e4d3ea33d7b1450cce04c1daa5929d36a1c35122de2df
 ```
 
 **VirusTotal:** [încarcă hash-ul de mai sus](https://www.virustotal.com/gui/home/upload) înainte de prima rulare — exe-ul este nesemnat.
@@ -190,7 +190,18 @@ Nu urca `config.json` pe GitHub și nu îl trimite nimănui. Dacă vrei să rese
 |---|---|
 | **ORGANIZEZ AG** | Scanează `/f` de la `:45`, anunță la ora aleasă dacă nu organizează altcineva, colectează maximum **3** dots, trimite lista, colectează telefoanele și pornește sesiunea ca **s/c/s**. |
 | **SOLO** | Nu anunță și nu colectează. Pornește doar cu telefonul propriu și publică anunțuri între `:50–:59`. |
-| **ALĂTURAT** | Dacă alt organizator anunță primul, trimite `.` pe `/f`, intră ca participant și **nu trimite niciodată formulele de sesiune**. |
+| **ALĂTURAT** | Dacă alt organizator anunță primul, trimite `.` pe `/f`, intră ca participant și **nu trimite formulele de sesiune** — doar dacă organizatorul nu te numește s/c/s. |
+| **S/C/S NUMIT** | Te-ai alăturat, iar organizatorul te-a numit s/c/s. Aplicația strânge telefoanele, cere `/number` pentru cine lipsește și dă formulele de start / continuare / stop + `Atentie, :58.`. |
+
+### Oferire ca s/c/s
+
+Bifa **„Când mă alătur, mă ofer și ca s/c/s”** (implicit oprită) trimite, după `.`, un mesaj separat pe `/f`: `Ma ofer s/c/s.` Nu ești pus obligatoriu — **organizatorul decide**.
+
+- Mesajul organizatorului este citit **în orice formă**: `Participanti: RewardK (s/c/s), X si Y.`, `reward s/c/s, rexxo, daze ajuta`, `s/c/s: RewardK`, `Reward tu esti scs`. Numele prescurtate (minimum 4 litere, ex. `reward` pentru `RewardK`) sunt potrivite cu jucătorii care au pus `.`.
+- Dacă ești numit înainte de `:50:20`, treci în **S/C/S NUMIT** și dai tu formulele. Dacă organizatorul scrie doar `reward s/c/s`, participanții sunt organizatorul + cine a pus `.`.
+- Dacă scrie `eu s/c/s`, numește pe altcineva, scrie doar `help` sau nu scrie nimic, rămâi participant, fără formule.
+- Dacă te numește s/c/s **fără** să te fi oferit, formulele se dau oricum — e responsabilitatea ta.
+- Dacă organizatorul se răzgândește (un mesaj nou cu alt s/c/s), numirea se anulează.
 
 ### Cronologie
 
@@ -203,7 +214,7 @@ Nu urca `config.json` pe GitHub și nu îl trimite nimănui. Dacă vrei să rese
 | `:49:30` | Termen pentru telefoane. Cine a dat `.` dar nu și numărul primește automat `/number Nume`; răspunsul (`Name: X | Number: 1234`) e citit din chatlog. |
 | `:50:20` | Start sesiune + formula oficială. |
 | `:55:20` | Continuare + formula oficială. |
-| `:58:00` | `Atentie, :58.` pe `/f` (regula 25; doar ca organizator, dacă ai participanți). Anunțurile continuă și după. |
+| `:58:00` | `Atentie, :58.` pe `/f` (regula 25; doar ca s/c/s — organizator sau numit —, dacă ai participanți). Anunțurile continuă și după. |
 | `:59:20` | Stop + formula oficială. |
 
 ### Reguli respectate automat
@@ -214,7 +225,7 @@ Nu urca `config.json` pe GitHub și nu îl trimite nimănui. Dacă vrei să rese
 - **Lista este trimisă la `:47`**, nu la `:50`.
 - **Formulele sunt oficiale**, nu texte scrise de model.
 - **O formulă întârziată este mai riscantă decât una lipsă.** După fereastra de 10 secunde, acțiunea este sărită.
-- **Când ești alăturat, nu trimiți formule.** Publici doar anunțuri.
+- **Când ești alăturat, nu trimiți formule** — doar dacă organizatorul te numește s/c/s; atunci le dai tu.
 
 ### De ce `:20`?
 
@@ -261,6 +272,7 @@ Vezi dintr-o privire dacă autopilotul este pornit, ce sesiune rulează, în ce 
 ### Autopilot
 Aici configurezi tot fluxul:
 - rolul AG;
+- oferirea ca s/c/s când te alături;
 - ora anunțului;
 - numele și telefonul;
 - orele de sesiune;
@@ -474,4 +486,4 @@ Rezultatul apare în `dist\Lazy NR by RewardK.exe`.
 - Exe-ul este nesemnat, deci SmartScreen sau antivirusul pot cere confirmare.
 - Dacă îți place proiectul, lasă un **star** pe GitHub și spune-mi ce mai adaugi.
 
-<p align="center"><b>Lazy NR by RewardK · v1.3.0.0</b><br><code>made by RewardK</code></p>
+<p align="center"><b>Lazy NR by RewardK · v1.3.2.0</b><br><code>made by RewardK</code></p>
